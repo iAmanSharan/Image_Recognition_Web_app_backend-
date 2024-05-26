@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, url_for
 import os
 from image_segmentation import process_image  # Import the segmentation function
 from flask_cors import CORS, cross_origin
@@ -52,9 +52,9 @@ def upload_image():
     if file and allowed_file(file.filename):
         file_path = save_image(file)  # Save the uploaded file
         output_filename = segment_image(file_path)  # Perform image segmentation
-
-        # Return the path or URL of the segmented image
-        return jsonify({'message': 'File uploaded and segmented successfully', 'filename': output_filename}), 200
+        segmented_image_path = os.path.join(app.config['SEGMENTED_FOLDER'], output_filename)
+        segmented_image_url = url_for('static', filename='segmented/' + output_filename, _external=True)
+        return jsonify({'message': 'File uploaded and segmented successfully', 'filename': output_filename, 'segmentedImageUrl': segmented_image_url}), 200
     else:
         return jsonify({'error': 'File type not allowed'}), 400
 
