@@ -6,3 +6,4 @@ matplotlib
 pillow
 torchvision==0.18.0+cu121
 torch==2.3.0
+torchaudio
