@@ -5,5 +5,5 @@ numpy
 matplotlib
 pillow
 torchvision==0.18.0+cu121
-torch==2.3.0
-torchaudio
+torch==2.3.0+cu121
+torchaudio==2.3.0+cu121
